@@ -1,10 +1,12 @@
 import java.util.*;
 import java.io.*;
 
+class Graph_Shortest_Path { 
+ 
+}
+
 public class assignment1 
 {
-    // Global helper variable that keeps track if vertex has an edge that connects it to previous vertex. 
-    private static final int noPrevVertex = -1;
     public static void main(String args[]) {
 
         // Try to read file, throw exception if not possible. 
@@ -32,13 +34,13 @@ public class assignment1
             line = new ArrayList<>(); // Clear to prepare for next row in the matrix.   
         }
 
-        //Run dijkstras's algorithm on dataset where UCF PID is: 4867444.
+        //Run Dijkstra's algorithm on dataset where UCF PID is: 4867444.
 
-        runDijkstras(matrix, 48, 86); // {48 , 86}
-        runDijkstras(matrix, 86, 7); // {86, 7}
-        runDijkstras(matrix, 7, 4); // {7, 4}
-        runDijkstras(matrix, 4, 44); // {4, 44}
-        runDijkstras(matrix, 44, 44); // {44, 44}
+        dijkstra(matrix, 48, 86); // {48 , 86}
+        dijkstra(matrix, 86, 7); // {86, 7}
+        dijkstra(matrix, 7, 4); // {7, 4}
+        dijkstra(matrix, 4, 44); // {4, 44}
+        dijkstra(matrix, 44, 44); // {44, 44}
 
     
         // Close scanner 
@@ -50,7 +52,10 @@ public class assignment1
         }
     }
  
-    private static void runDijkstras(int[][] A, int start, int end)
+        
+    private static final int noPrevVertex = -1;
+ 
+    private static void dijkstra(int[][] A, int start, int end)
     {
         int numOfVertices = A[0].length;
  
@@ -95,6 +100,9 @@ public class assignment1
            // We have visited this vertex and we no longer want to search it.
             visitedVertex[closestVertex] = true;
  
+            // Update dist value of the
+            // adjacent vertices of the
+            // picked vertex.
             for (int vertexIndex = 0; vertexIndex < numOfVertices; vertexIndex++)
             {
                 int edgeDistance = A[closestVertex][vertexIndex];
@@ -131,7 +139,6 @@ public class assignment1
             return;
         }
 
-        //Print out each step in shortest path array from START to END.
         displayShortestPath(shortestPathArray[end], shortestPathArray);
         System.out.print(end + " ");
     }

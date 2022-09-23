@@ -1,10 +1,12 @@
 import java.util.*;
 import java.io.*;
 
+class Graph_Shortest_Path { 
+ 
+}
+
 public class assignment1 
 {
-    // Global helper variable that keeps track if vertex has an edge that connects it to previous vertex. 
-    private static final int noPrevVertex = -1;
     public static void main(String args[]) {
 
         // Try to read file, throw exception if not possible. 
@@ -32,13 +34,13 @@ public class assignment1
             line = new ArrayList<>(); // Clear to prepare for next row in the matrix.   
         }
 
-        //Run dijkstras's algorithm on dataset where UCF PID is: 4867444.
+        //Run Dijkstra's algorithm on dataset where UCF PID is: 4867444.
 
-        runDijkstras(matrix, 48, 86); // {48 , 86}
-        runDijkstras(matrix, 86, 7); // {86, 7}
-        runDijkstras(matrix, 7, 4); // {7, 4}
-        runDijkstras(matrix, 4, 44); // {4, 44}
-        runDijkstras(matrix, 44, 44); // {44, 44}
+        dijkstra(matrix, 48, 86); // {48 , 86}
+        dijkstra(matrix, 86, 7); // {86, 7}
+        dijkstra(matrix, 7, 4); // {7, 4}
+        dijkstra(matrix, 4, 44); // {4, 44}
+        dijkstra(matrix, 44, 44); // {44, 44}
 
     
         // Close scanner 
@@ -50,69 +52,98 @@ public class assignment1
         }
     }
  
-    private static void runDijkstras(int[][] A, int start, int end)
+        
+    private static final int noPrevVertex = -1;
+ 
+    private static void dijkstra(int[][] A, int start, int end)
     {
         int numOfVertices = A[0].length;
  
-        // Contains each vertex that makes up shortest path from START to END.
+        // shortestPath[i] will hold the
+        // shortest distance from src to i
         int[] shortestPath = new int[numOfVertices];
  
-       
-        boolean[] visitedVertex = new boolean[numOfVertices]; // Initialize array that keeps track of whether we have seen this vertex or not. 
+        // visitedVertex[i] will true if vertex i is
+        // included / in shortest path tree
+        // or shortest distance from src to
+        // i is finalized
+        boolean[] visitedVertex = new boolean[numOfVertices];
  
-        // Mark all nodes with infinity and set their visited state to false.
+        // Initialize all distances as
+        // INFINITE and visitedVertex[] as false
         for (int vertexIndex = 0; vertexIndex < numOfVertices; vertexIndex++)
         {
             shortestPath[vertexIndex] = Integer.MAX_VALUE;
             visitedVertex[vertexIndex] = false;
         }
          
-        // If we are trying to find distance from vertex to itself, make this distance 0
+       // If we are trying to find distance from vertex to itself, make this distance 0
         shortestPath[start] = 0;
  
-        // Stores shortest path for printing later. 
+        // Parent array to store shortest
+        // path tree
         int[] shortestPathArray = new int[numOfVertices];
  
-        // The source does not have a previous vertex. (Useful to mark for printing purposes later)
+        // The starting vertex does not
+        // have a parent
         shortestPathArray[start] = noPrevVertex;
  
-        // Find shortest path from START to END
+        // Find shortest path for all
+        // vertices
         for (int i = 1; i < numOfVertices; i++)
         {
-            int closestVertex = -1; // Initialize with null for closest vertex to current. 
-            int shortestDistance = Integer.MAX_VALUE; // Initalize with largest distance.
-
-            for (int vertexIndex = 0; vertexIndex < numOfVertices; vertexIndex++)
+ 
+            // Pick the minimum distance vertex
+            // from the set of vertices not yet
+            // processed. nearestVertex is
+            // always equal to startNode in
+            // first iteration.
+            int nearestVertex = -1;
+            int shortestDistance = Integer.MAX_VALUE;
+            for (int vertexIndex = 0;
+                     vertexIndex < numOfVertices;
+                     vertexIndex++)
             {
-                // If we haven't marked this vertex as VISITED and there is a newest shortest path: update shortest path distance.
-                if (!visitedVertex[vertexIndex] && shortestPath[vertexIndex] < shortestDistance)
+                if (!visitedVertex[vertexIndex] &&
+                    shortestPath[vertexIndex] <
+                    shortestDistance)
                 {
-                    closestVertex = vertexIndex;
+                    nearestVertex = vertexIndex;
                     shortestDistance = shortestPath[vertexIndex];
                 }
             }
  
-           // We have visited this vertex and we no longer want to search it.
-            visitedVertex[closestVertex] = true;
+            // Mark the picked vertex as
+            // processed
+            visitedVertex[nearestVertex] = true;
  
+            // Update dist value of the
+            // adjacent vertices of the
+            // picked vertex.
             for (int vertexIndex = 0; vertexIndex < numOfVertices; vertexIndex++)
             {
-                int edgeDistance = A[closestVertex][vertexIndex];
+                int edgeDistance = A[nearestVertex][vertexIndex];
                  
                 if (edgeDistance > 0 && ((shortestDistance + edgeDistance) < shortestPath[vertexIndex]))
                 {
-                    shortestPathArray[vertexIndex] = closestVertex;
+                    shortestPathArray[vertexIndex] = nearestVertex;
                     shortestPath[vertexIndex] = shortestDistance + edgeDistance;
                 }
             }
         }
  
-        displayData(start, end, shortestPath, shortestPathArray);
+        printSolution(start, end, shortestPath, shortestPathArray);
     }
  
-    // Helper method that displays start/end, shortest path traveled and shortest path distance. 
-    private static void displayData(int start, int end, int[] distances, int[] shortestPathArray)
+    // A utility function to print
+    // the constructed distances
+    // array and shortest paths
+    private static void printSolution(int start, int end,
+                                      int[] distances,
+                                      int[] shortestPathArray)
     {
+        //int numOfVertices = distances.length;
+      
         System.out.print("\n" + "{" + start + " : " + end + "}" + "\n");
         System.out.print("Path traveled: ");
         displayShortestPath(end, shortestPathArray);
@@ -121,7 +152,9 @@ public class assignment1
     }
     
  
-    // Helper method that displays sequence of vertices that make up the shortest path from START to END. 
+    // Function to print shortest path
+    // from source to currentVertex
+    // using shortestPathArray array
     private static void displayShortestPath(int end, int[] shortestPathArray)
     {
          
@@ -131,7 +164,6 @@ public class assignment1
             return;
         }
 
-        //Print out each step in shortest path array from START to END.
         displayShortestPath(shortestPathArray[end], shortestPathArray);
         System.out.print(end + " ");
     }

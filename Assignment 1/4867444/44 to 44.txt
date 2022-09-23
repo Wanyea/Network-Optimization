@@ -1,0 +1,3 @@
+{44 : 44}
+Path traveled: 44 
+Shortest path distance: 0

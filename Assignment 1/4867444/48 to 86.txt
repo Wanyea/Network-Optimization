@@ -1,0 +1,3 @@
+{48 : 86}
+Path traveled: 48 18 85 2 1 86 
+Shortest path distance: 12

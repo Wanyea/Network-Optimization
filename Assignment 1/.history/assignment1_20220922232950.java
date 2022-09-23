@@ -1,10 +1,12 @@
 import java.util.*;
 import java.io.*;
 
+class Graph_Shortest_Path { 
+ 
+}
+
 public class assignment1 
 {
-    // Global helper variable that keeps track if vertex has an edge that connects it to previous vertex. 
-    private static final int noPrevVertex = -1;
     public static void main(String args[]) {
 
         // Try to read file, throw exception if not possible. 
@@ -95,6 +97,9 @@ public class assignment1
            // We have visited this vertex and we no longer want to search it.
             visitedVertex[closestVertex] = true;
  
+            // Update dist value of the
+            // adjacent vertices of the
+            // picked vertex.
             for (int vertexIndex = 0; vertexIndex < numOfVertices; vertexIndex++)
             {
                 int edgeDistance = A[closestVertex][vertexIndex];
@@ -131,7 +136,6 @@ public class assignment1
             return;
         }
 
-        //Print out each step in shortest path array from START to END.
         displayShortestPath(shortestPathArray[end], shortestPathArray);
         System.out.print(end + " ");
     }

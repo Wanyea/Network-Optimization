@@ -1,0 +1,4 @@
+{4 : 44}
+Path traveled: 4 67 16 73 27 44 
+Shortest path distance: 12
+8

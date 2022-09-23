@@ -60,7 +60,7 @@ public class assignment1
        
         boolean[] visitedVertex = new boolean[numOfVertices]; // Initialize array that keeps track of whether we have seen this vertex or not. 
  
-        // Mark all nodes with infinity and set their visited state to false.
+        // Mark all vertices with infinity and set their visited state to false.
         for (int vertexIndex = 0; vertexIndex < numOfVertices; vertexIndex++)
         {
             shortestPath[vertexIndex] = Integer.MAX_VALUE;
@@ -97,12 +97,12 @@ public class assignment1
  
             for (int vertexIndex = 0; vertexIndex < numOfVertices; vertexIndex++)
             {
-                int edgeDistance = A[closestVertex][vertexIndex];
+                int distance = A[closestVertex][vertexIndex];
                  
-                if (edgeDistance > 0 && ((shortestDistance + edgeDistance) < shortestPath[vertexIndex]))
+                if (distance > 0 && ((shortestDistance + distance) < shortestPath[vertexIndex]))
                 {
                     shortestPathArray[vertexIndex] = closestVertex;
-                    shortestPath[vertexIndex] = shortestDistance + edgeDistance;
+                    shortestPath[vertexIndex] = shortestDistance + distance;
                 }
             }
         }

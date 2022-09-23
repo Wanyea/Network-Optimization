@@ -11,4 +11,4 @@ To run Assignment 1 follow these steps:
 	iii) Run 'java assignment1' command to run file.
 	iv) You should see valid output in command prompt where UCF ID is: 4867444
 
-Thanks for using my program!
+Thanks for using my program! ❤️

@@ -2,7 +2,7 @@
 
 To run Assignment 1 follow these steps:
 
-1. Unzip the submitted '4867444' folder and locate the directory the 'assignment1.java' file is located.
+1. Unzip the submitted '4867444' folder and locate the directory where the 'assignment1.java' file is located.
 
 2. On Windows:
 

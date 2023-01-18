@@ -26,14 +26,19 @@ public class assignment2 {
              List<String> line = new ArrayList<String>();
              
              //Populate n x n matrix. 
-             for(int i = 0; i < n; i++) {
-                 if(dataFileInput.hasNext()) {
+             for(int i = 0; i < n; i++) 
+             {
+                 if(dataFileInput.hasNext()) 
+                 {
                      line.add(dataFileInput.next());
                      StringTokenizer tokenizer = new StringTokenizer(line.get(0), ",");
-                     for(int k = 0; tokenizer.hasMoreTokens(); k++) {
+
+                     for(int k = 0; tokenizer.hasMoreTokens(); k++) 
+                     {
                          matrix[i][k] = Integer.parseInt(tokenizer.nextToken());
                      }
                  }
+                 
                  line = new ArrayList<>(); // Clear to prepare for next row in the matrix.   
              }
  
